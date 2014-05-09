@@ -2,18 +2,78 @@
 <html>
 <head lang="en">
 	<meta charset="UTF-8">
-	<title></title>
-	<script src="pages.js"></script>
-	<script>
-		function trigger(){
-			for(var pagename in data){
-				var win = window.open(data[pagename]);
-			}
-			//window.location.href = "http://stackoverflow.com";
-		}
-		</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!--<link rel="stylesheet" href="css/bootstrap-theme.css">-->
+	<link rel="stylesheet" href="css/pageHub.css">
+	<title>Winters' Hybird Link</title>
 </head>
-<body>
-	<button type="button" onclick="trigger()" style="width: 100%; height: 100%;">Click Me!</button>
+<body ng-app="pageHub" ng-controller="PageHubCtrl">
+
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">{{title}}</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right">
+					<input class="form-control" id="search_input" ng-model="search" placeholder="Full Text Filter">
+					<input class="form-control" id="title_search" ng-model="searchString" placeholder="Title Filter">
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container-fluid">
+		<div class="row control-panel">
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>
+				<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></button>
+				<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></button>
+			</div>
+
+			<div class="bar">
+				<button type="button" class="btn btn-default" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'">
+					<span class="glyphicon glyphicon-th"></span>
+				</button>
+				<button type="button" class="btn btn-default" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'">
+					<span class="glyphicon glyphicon-th-list"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container-fluid">
+		<div ng-show="layout == 'grid'" class="row content-panel">
+			<div class="col-xs-6 col-sm-3 col-md-2 col-lg-1" ng-repeat="page in pages | filter:search | searchNameFor:searchString" ng-click="showPages(page.url)">
+				<a href="#" class="thumbnail hybird-link">
+					<img src="{{favionUrlCreator(page.url)}}" class="img-responsive" alt="Web Image">
+					{{page.pageName}}
+				</a>
+			</div>
+		</div>
+
+		<ul ng-show="layout == 'list'" class="list content-panel">
+			<!-- filter: uppercase/lowercase/number -->
+			<!-- ng-click/ng-change/ng-mouseenter -->
+			<li ng-repeat="page in pages | filter:search | searchNameFor:searchString" ng-click="showPages(page.url)">
+				{{page.pageName}} {{page.url}}
+			</li>
+		</ul>
+	</div>
+
+<div ng-view></div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-resource.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
