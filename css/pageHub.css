@@ -1,6 +1,7 @@
 body {
-    padding-top: 50px;
+    padding-top: 51px;
 }
+
 
 .control-panel {
     padding-top: 5px;
@@ -18,10 +19,61 @@ body {
     padding-top: 5px;
 }
 
-.hybird-link {
+/***** link item style ****/
+.hybrid-link {
     height: 120px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 24px 24px;
+    overflow: hidden;
 }
-.hybird-link img{
-    width: 32px;
-    height: 32px;
+.hybrid-link img{
+    width: 24px;
+    height: 24px;
 }
+.link-item .link-title{
+    position: absolute;
+    bottom: -40px;
+    height: 40px;
+    width: 100%;
+    color: #ffffff;
+    background-color: #808080;
+    opacity: 0.0;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+.link-item:hover .link-title{
+    bottom: 0;
+    opacity: 0.4;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+@media (min-width: 768px) {
+    .hybrid-link {
+        height: 140px;
+    }
+}
+@media (min-width: 992px) {
+    .hybrid-link {
+        height: 160px;
+    }
+}
+@media (min-width: 1200px) {
+    .hybrid-link {
+        height: 180px;
+    }
+}
+
+/* Override Bootstrap CSS */
+
+.content-panel .link-item{
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+}
+.content-panel .link-item .thumbnail{
+    margin-bottom: 0;
+    border-radius: 0;
+    padding: 0;
+}
+

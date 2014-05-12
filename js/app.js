@@ -38,14 +38,15 @@ pageHub.controller("PageHubCtrl", function($scope, resourceAPI){
 
 	$scope.title = "Hybird";
 	$scope.layout = 'grid';
+	$scope.order = '';
 	$scope.favatarAPIKey = "2iy4ooxu37k0gw4wck84w8w8ckgc4wwc0s404400gsc400cows";
 	$scope.pages = [
 		{pageName:"Google", url:"https://www.google.com/"},
 		{pageName:"Weibo", url:"http://www.weibo.com/"},
-		{pageName:"Gmail", url:"https://mail.google.com/"},
+		{pageName:"Gmail", url:"http://www.gmail.com/"},
 		{pageName:"cnBeta", url:"http://www.cnbeta.com/"},
-		{pageName:"Linkedin", url:"https://www.linkedin.com/"},
-		{pageName:"DigitalOcean", url:"https://cloud.digitalocean.com/"},
+		{pageName:"Linkedin", url:"http://www.linkedin.com/"},
+		{pageName:"DigitalOcean", url:"http://www.digitalocean.com/"},
 		{pageName:"Facebook", url:"https://www.facebook.com/"},
 		{pageName:"Renren", url:"http://www.renren.com/"},
 		{pageName:"Steam", url:"http://store.steampowered.com/"}
@@ -55,10 +56,16 @@ pageHub.controller("PageHubCtrl", function($scope, resourceAPI){
 		console.log(page);
 	};
 
-	$scope.favionUrlCreator = function(siteUrl){
-		var iconUrl = "http://favatar.mention.com/image?format=image&api_key=" + $scope.favatarAPIKey + "&url=" + siteUrl;
-		return iconUrl;
+	$scope.mentionFavionCreator = function(siteUrl){
+		return "http://favatar.mention.com/image?format=image&api_key=" + $scope.favatarAPIKey + "&url=" + siteUrl;
 	};
+	$scope.fviconFavionCreator = function(siteUrl){
+		return "http://x.fvicon.com/" + siteUrl + "?canAudit=false";
+	};
+	$scope.googleFavionCreator = function(siteUrl){
+		return "http://www.google.com/s2/favicons?domain=" + siteUrl;
+	};
+
 
 
 	resourceAPI.fetchData(function(data){
